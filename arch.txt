@@ -1,0 +1,5 @@
+Java-2d-game-engine[project-name]:
+src[package]
+-> com.java.engine[package]
+    -> GameContainer.java[java-class]
+    -> Window.java[java-class]

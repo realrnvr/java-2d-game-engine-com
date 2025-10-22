@@ -1,0 +1,49 @@
+-- classDescription
+Game container contains the core of the system:
+game loop, inputs, rendering logic, etc.
+
+-- implements 
+# Runnable[interface]
+
+-- fields
+# private Thread thread
+
+# private boolean running = false
+# private final double UPDATE_CAP = 1.0 / 60.
+# private int width = 320, height = 240;
+# private float scale = 1f;
+# private String title = "Java Engine v1.0";
+
+-- constructor
+# public GameContainer()[constructor]
+
+-- methods
+# public void start()[method]:
+[description]: 
+Will instantiate the thread class by passing
+"this" to the thread class constructor 
+and call run() of the instance variable.
+
+# public void stop()[method]:
+[description]: 
+
+# public void run()[method]
+[description]: 
+Will assign "running" boolean field to true
+making the system aware of the state of the engine.
+Then staring the game loop.(refer game-loop/loop.txt)
+
+# private void dispose()[method]
+[description]: 
+
+-- methods -> getters and setters
+
+@name -> {height, width, scale, title}
+
+# public int get{name}()[method]
+[description]:
+Will return the value of the field {name}.
+
+# public void set{name}(int new{name})[method]
+[description]:
+Will assign the new value to the field {name}.

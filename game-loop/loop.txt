@@ -1,0 +1,50 @@
+-- game loop
+
+boolean render = false;
+double firstTime = 0;
+double lastTime = System.nanoTime() / 1e9;
+double passedTime = 0;
+double unprocessedTime = 0;
+
+double frameTime = 0;
+int frames = 0;
+int fps = 0;
+
+while(running) {
+    render = false;
+    firstTime = System.nanoTime / 1e9;
+    passedTime = firstTime - lastTime;
+    lastTime = firstTime;
+
+    unprocessedTime += passedTime;
+    
+    // double UPDATE_CAP = 1.0 / 60.0[GameContainer->field]
+    while(unprocessedTime >= UPDATE_CAP) {
+        unprocessedTime -= UPDATE_CAP;
+        render = true;
+
+        if(frameTime >= 1.0) {
+            frameTime = 0;
+            fps = frames;
+            frames = 0;
+            System.out.println("FPS: " + fps);
+        }
+
+        // update game state
+    }
+
+    if(render) {
+        frames += 1;
+
+        // render game state
+    } else {
+        try {
+            Thread.sleep(1);
+        } catch(InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // void dispose()[GameContainer->method]
+    dispose();
+}

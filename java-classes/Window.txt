@@ -1,0 +1,106 @@
+-- constructor
+
+# public Window(GameContainer gc)[constructor][GameContainer->class]
+[description]:
+# ln1 -> 
+instantiate (image[field]) by calling 
+the parameterized BufferedImage
+class constructor by passing agrs as
+(integerWidth, integerHeight, bufferImageType). 
+[image-stored-in-ram-buffer]
+
+# ln2 -> 
+instantiate (canvas[field]) by calling the default
+Canvas class constructor.
+[clean-slate-to-paint-on]
+
+# ln3 -> 
+instantiate (s[localVariable]) by calling parameterized Dimension 
+class constructor by passing args as 
+(integerWidth, integerHeight)
+[create-rect-on-slate]
+
+# ln4 to ln6 -> 
+use the setter provided by canvas object i.e., 
+setPreferredSize(Dimension),
+setMaximumSize(Dimension),
+seetMinimumSize(Dimension).
+FORALL[self-explanatory]
+
+# ln7 -> 
+instantiate (frame[field]) by calling parameterized JFrame
+class constructor by passing args as
+(stringTitle)
+[screeining-of-slate]
+
+# ln8 ->
+use the setter provided by frame object i.e.,
+setDefaultCloseOperation(options) 
+[exit-when-click-on-cross-&-halt-the-programe]
+
+# ln9 ->
+use the setter provided by frame object i.e.,
+setLayout(BorderLayout)
+[self-explanatory]
+
+# ln10 ->
+use the add method of frame object to add the canvas
+and pass BorderLayout position i.e.,
+add(Canvas, positionString)
+
+# ln11 to ln14 ->
+* use the pack method to set the JFrame window size wrap over
+the canvas layout and fit exactly to the canvas.
+* use setLocationRelativeTo(configObject) will show up on top left 
+by default passing it null makes it show up on the center.
+* use setResizable(boolean) to make the window not resize and vice-versa.
+* use setVisible(boolean) to make the window show up or not.
+
+
+[code]:
+// gc.getWidth()[GameContainer->method]
+// gc.getHeight()[GameContainer->method]
+// gc.getScale()[GameContainer->method]
+// gc.getTitle()[GameContainer->method]
+
+# ln1 -> 
+this.image = new BufferedImage(gc.getWidth(), gc.getHeight(), 
+                    BufferedImage.TYPE_INT_RGB);
+
+# ln2 -> 
+this.canvas = new Canvas();
+
+# ln3 -> 
+s = new Dimension((int)(gc.getWidth() * gc.getScale()), 
+            (int)(gc.getHeight() * gc.getScale()));
+
+# ln4 to ln6 -> 
+this.canvas.setPreferredSize(s);
+this.canvas.setMaximumSize(s);
+this.canvas.seetMinimumSize(s);
+
+# ln7 ->
+this.frame = new JFrame(gc.getTitle());
+
+# ln8 ->
+this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+# ln9 ->
+this.frame.setLayout(new BorderLayout());
+
+# ln10 ->
+this.frame.add(canvas, BorderLayout.CENTER);
+
+# ln11 to ln14 ->
+this.frame.pack();
+this.frame.setLayoutRelativeTo(null);
+this.frame.setResizable(false);
+this.frame.setVisible(true);
+
+-- fields
+
+# private JFrame frame
+# private BufferedImage image
+# private Canvas canvas
+# private BufferedStrategy bs
+# private Graphics g
