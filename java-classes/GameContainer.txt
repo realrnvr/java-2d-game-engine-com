@@ -6,23 +6,38 @@ game loop, inputs, rendering logic, etc.
 # Runnable[interface]
 
 -- fields
-# private Thread thread
+# private Thread thread;
+# private Window window;
+# private Renderer renderer;
+# private Input input;
 
-# private boolean running = false
-# private final double UPDATE_CAP = 1.0 / 60.
+# private boolean running = false;
+# private final double UPDATE_CAP = 1.0 / 60.0;
 # private int width = 320, height = 240;
-# private float scale = 1f;
+# private float scale = 3f;
 # private String title = "Java Engine v1.0";
 
 -- constructor
+
 # public GameContainer()[constructor]
+[description]:
+GameContainer default constructor which will 
+help create GameContainer object.
 
 -- methods
+
 # public void start()[method]:
 [description]: 
 Will instantiate the thread class by passing
 "this" to the thread class constructor 
 and call run() of the instance variable.
+
+[code]:
+this.window = new Window(this);
+this.render = new Renderer(this);
+this.input  = new Input(this);
+this.thread = new Thread(null);
+this.thread.run();
 
 # public void stop()[method]:
 [description]: 
@@ -31,14 +46,17 @@ and call run() of the instance variable.
 [description]: 
 Will assign "running" boolean field to true
 making the system aware of the state of the engine.
-Then staring the game loop.(refer game-loop/loop.txt)
+Then staring the game loop.(refer "game-loop/loop.txt")
+
+[code]:
+ref "game-loop/loop.txt";
 
 # private void dispose()[method]
 [description]: 
 
 -- methods -> getters and setters
 
-@name -> {height, width, scale, title}
+@name -> {Height, Width, Scale, Title, Window->!setter}
 
 # public int get{name}()[method]
 [description]:
