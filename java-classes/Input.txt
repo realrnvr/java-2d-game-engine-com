@@ -1,0 +1,195 @@
+
+-- implements 
+# KeyListener[interface] 
+# MouseListener[interface]
+# MouseMotionListener[interface] 
+# MouseWheelListener[interface]
+
+-- fields
+
+# private GameContainer gc;
+
+# private final int NUM_KEYS = 256;
+# private boolean[] keys = new boolean[NUM_KEYS];
+# private boolean[] keysLast = new boolean[NUM_KEYS];
+
+# private final int NUM_BUTTONS = 5;
+# private boolean[] buttons = new boolean[NUM_BUTTONS];
+# private boolean[] buttonsLast = new boolean[NUM_BUTTONS];
+
+# private int mouseX, mouseY;
+# private int scroll; // -1->up, 0->rest, 1->down
+
+-- constructor
+
+# public Input(GameContainer gc)[constructor]:
+[description]:
+
+[code]:
+
+this.gc = gc;
+mouseX = mouseY = scroll = 0;
+
+gc.getWindow().getCanvas().addKeyListener(this);
+gc.getWindow().getCanvas().addMouseMotionListener(this);
+gc.getWindow().getCanvas().addMouseListener(this);
+gc.getWindow().getCanvas().addMouseWheelListener(this);
+
+-- methods
+
+# public void update()[method]:
+[description]:
+
+[code]:
+
+scroll = 0;
+
+for(int i = 0; i < NUM_KEYS; ++i) {
+    keysLast[i] = keys[i];
+}
+
+for(int i = 0; i < NUM_BUTTONS; ++i) {
+    buttonsLast[i] = buttons[i];
+}
+
+# public boolean isKey(int keyCode)[method]:
+[description]:
+checks if the key exists or not.
+
+[code]:
+
+return keys[keyCode];
+
+# public boolean isKeyUp(int keyCode)[method]:
+[description]:
+will return true if the key was pressed in the
+last frame but not in the current frame, otherwise
+false.
+
+[code]:
+
+return !keys[keyCode] && keysLast[keyCode];
+
+# public boolean isKeyDown(int keyCode)[method]:
+[description]:
+will return true if the key was not pressed in the 
+last frame but was pressed in the current frame, otherwise
+false. 
+
+[code]:
+
+return keys[keyCode] && !keysLast[keyCode];
+
+# public boolean isButton(int button)[method]:
+[description]:
+checks if the button exists or not.
+
+[code]:
+
+return buttons[button];
+
+# public boolean isButtonUp(int button)[method]:
+[description]:
+will return true if the button was pressed in the
+last frame but not in the current frame, otherwise
+false.
+
+[code]:
+
+return !buttons[button] && buttonsLast[button];
+
+# public boolean isButtonDown(int button)[method]:
+[description]:
+will return true if the button was not pressed in the 
+last frame but was pressed in the current frame, otherwise
+false. 
+
+[code]:
+
+return buttons[button] && !buttonsLast[button];
+
+-- overridenMethods
+
+# public void mouseWheelMoved(MouseWheelEvent e)[overriden-method]:
+[description]:
+
+[code]:
+
+this.scroll = e.getWheelRotation();
+
+# public void mouseDragged(MouseEvent e)[overriden-method]:
+[description]:
+
+[code]:
+
+this.mouseX = (int)(e.getX() / gc.getScale());
+this.mouseY = (int)(e.getY() / gc.getScale());
+
+
+# public void mouseMoved(MouseEvent e)[overriden-method]:
+[description]:
+
+[code]:
+
+this.mouseX = (int)(e.getX() / gc.getScale());
+this.mouseY = (int)(e.getY() / gc.getScale());
+
+
+# public void mouseClicked(MouseEvent e)[overriden-method]:
+[description]:
+
+[code]:
+
+# public void mouseEntered(MouseEvent e)[overriden-method]:
+[description]:
+
+[code]:
+
+# public void mouseExited(MouseEvent e)[overriden-method]:
+[description]:
+
+[code]:
+
+# public void mousePressed(MouseEvent e)[overriden-method]:
+[description]:
+
+[code]:
+
+this.buttons[e.getButton()] = true;
+
+# public void mouseReleased(MouseEvent e)[overriden-method]:
+[description]:
+
+[code]:
+
+this.buttons[e.getButton()] = false;
+
+# public void keyPressed(KeyEvent e)[overriden-method]:
+[description]:
+
+[code]:
+
+this.keys[e.getKeyCode()] = true;
+
+# public void keyReleased(KeyEvent e)[overriden-method]:
+[description]:
+
+[code]:
+
+this.keys[e.getKeyCode()] = false;
+
+# public void keyTyped(KeyEvent e)[overriden-method]:
+[description]:
+
+[code]:
+
+
+@name -> {MouseX->!setter, MouseY->!setter, Scroll->!setter}
+
+# public int get{name}()[method]
+[description]:
+Will return the value of the field {name}.
+
+# public void set{name}(int new{name})[method]
+[description]:
+Will assign the new value to the field {name}.
