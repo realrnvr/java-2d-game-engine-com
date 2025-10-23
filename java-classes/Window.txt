@@ -1,7 +1,22 @@
+-- classDescription
+Window of the game where the state gets rendered
+all the game UI logic will be handled here.
+
+-- fields
+
+# private JFrame frame;
+# private BufferedImage image;
+# private Canvas canvas;
+# private BufferedStrategy bs;
+# private Graphics g;
+
 -- constructor
 
 # public Window(GameContainer gc)[constructor][GameContainer->class]
 [description]:
+Window parameterized constructor which takes GameContainer as agrument 
+and initialize class fields with defaults.
+
 # ln1 -> 
 instantiate (image[field]) by calling 
 the parameterized BufferedImage
@@ -47,15 +62,34 @@ setLayout(BorderLayout)
 use the add method of frame object to add the canvas
 and pass BorderLayout position i.e.,
 add(Canvas, positionString)
+[add-canvas-with-provided-position]
 
 # ln11 to ln14 ->
 * use the pack method to set the JFrame window size wrap over
 the canvas layout and fit exactly to the canvas.
+[self-explanatory]
 * use setLocationRelativeTo(configObject) will show up on top left 
 by default passing it null makes it show up on the center.
+[self-explanatory]
 * use setResizable(boolean) to make the window not resize and vice-versa.
+[self-explanatory]
 * use setVisible(boolean) to make the window show up or not.
+[self-explanatory]
 
+# ln15 ->
+use the createBufferStrategy(integer) method of 
+the canvas object to create a buffer strategy.
+[self-explanatory]
+
+# ln16 ->
+use the getBufferStrategy() method of canvas object
+to initialize bs object.
+[self-explanatory]
+
+# ln17 ->
+use the getDrawGraphics() method of bs object to 
+initialize g object.
+[self-explanatory]
 
 [code]:
 // gc.getWidth()[GameContainer->method]
@@ -65,14 +99,14 @@ by default passing it null makes it show up on the center.
 
 # ln1 -> 
 this.image = new BufferedImage(gc.getWidth(), gc.getHeight(), 
-                    BufferedImage.TYPE_INT_RGB);
+                BufferedImage.TYPE_INT_RGB);
 
 # ln2 -> 
 this.canvas = new Canvas();
 
 # ln3 -> 
 s = new Dimension((int)(gc.getWidth() * gc.getScale()), 
-            (int)(gc.getHeight() * gc.getScale()));
+        (int)(gc.getHeight() * gc.getScale()));
 
 # ln4 to ln6 -> 
 this.canvas.setPreferredSize(s);
@@ -97,10 +131,37 @@ this.frame.setLayoutRelativeTo(null);
 this.frame.setResizable(false);
 this.frame.setVisible(true);
 
--- fields
+# ln15 ->
+this.canvas.createBufferStrategy(2);
 
-# private JFrame frame
-# private BufferedImage image
-# private Canvas canvas
-# private BufferedStrategy bs
-# private Graphics g
+# ln16 ->
+this.bs = this.canvas.getBufferStrategy();
+
+# ln17 ->
+this.g = this.bs.getDrawGraphics();
+
+-- methods
+
+public void update()[method]:
+[description]:
+use the drawImage method provided by g object and
+pass agrs as (BufferedImage, startX, startY, 
+                endX, endY, observer).
+use show method of bs object.
+
+[code]:
+g.drawImage(image, 0, 0, canvas.getWidth(), 
+                canvas.getHeight(), null);
+bs.show();
+
+-- methods -> getters and setters
+
+@name -> {Canvas->!setter, image->!setter, frame->!setter}
+
+# public int get{name}()[method]
+[description]:
+Will return the value of the field {name}.
+
+# public void set{name}(int new{name})[method]
+[description]:
+Will assign the new value to the field {name}.
