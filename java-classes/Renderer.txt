@@ -1,0 +1,35 @@
+-- classDescription
+Use to render images/UI on the slate.
+
+-- fields
+
+# private int pW, pH
+# private int[] p
+
+-- constructor
+
+public Renderer(GameContainer gc)[constructor]:
+[description]:
+* initializes pixel width and pixel height.
+* initializes pixle array with the image buffer present
+in window.
+
+[code]:
+
+pW = gc.getWidth();
+pH = gc.getHeight();
+p = ((dataBuffer)gc.getWindow().getImage().getRaster()
+        .getDataBuffer()).getData();
+
+-- methods
+
+public void clear()[method]:
+[description]:
+use to clear the slate i.e., making it all black.
+
+[code]:
+
+// p->field
+for(int i = 0; i < p.length; ++i) {
+    p[i] = 0;
+}
