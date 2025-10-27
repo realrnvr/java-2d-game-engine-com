@@ -7,7 +7,7 @@ all the game UI logic will be handled here.
 # private JFrame frame;
 # private BufferedImage image;
 # private Canvas canvas;
-# private BufferedStrategy bs;
+# private BufferStrategy bs;
 # private Graphics g;
 
 -- constructor
@@ -105,13 +105,13 @@ this.image = new BufferedImage(gc.getWidth(), gc.getHeight(),
 this.canvas = new Canvas();
 
 # ln3 -> 
-s = new Dimension((int)(gc.getWidth() * gc.getScale()), 
+Dimension s = new Dimension((int)(gc.getWidth() * gc.getScale()), 
         (int)(gc.getHeight() * gc.getScale()));
 
 # ln4 to ln6 -> 
 this.canvas.setPreferredSize(s);
 this.canvas.setMaximumSize(s);
-this.canvas.seetMinimumSize(s);
+this.canvas.setMinimumSize(s);
 
 # ln7 ->
 this.frame = new JFrame(gc.getTitle());
@@ -127,7 +127,7 @@ this.frame.add(canvas, BorderLayout.CENTER);
 
 # ln11 to ln14 ->
 this.frame.pack();
-this.frame.setLayoutRelativeTo(null);
+this.frame.setLocationRelativeTo(null);
 this.frame.setResizable(false);
 this.frame.setVisible(true);
 

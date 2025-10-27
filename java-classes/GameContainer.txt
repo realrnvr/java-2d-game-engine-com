@@ -36,7 +36,7 @@ and call run() of the instance variable.
 this.window = new Window(this);
 this.render = new Renderer(this);
 this.input  = new Input(this);
-this.thread = new Thread(null);
+this.thread = new Thread(this);
 this.thread.run();
 
 # public void stop()[method]:
